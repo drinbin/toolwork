@@ -27,6 +27,7 @@ body {
   color: #2b3e4e;
   background: #f8fafc;
   width: 100%;
+  word-break: break-all;
 }
 
 /**

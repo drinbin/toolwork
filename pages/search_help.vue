@@ -1,8 +1,10 @@
 <template>
   <div id="search_help">
     <ToolContainer title="帮你百度">
+      <div class="number">{{ content.length }} / {{ maxLength }}</div>
       <a-input
         allow-clear
+        :maxLength="maxLength"
         v-model.trim="content"
         placeholder="怎么发家致富"
         @pressEnter="createCourse"
@@ -15,18 +17,22 @@
     <ToolIntro>
       <li>问题太easy，不想回答？用这个工具教他百度吧~</li>
     </ToolIntro>
-    <ToolContainer title="教程地址" v-if="results"> 开发中 </ToolContainer>
-    <!-- <div v-if="results" title="获取成功">
+    <ToolContainer title="教程地址" v-if="results">
       <a :href="results" target="_blank" rel="noopener noreferrer">
         {{ results }}
       </a>
-    </div> -->
+      <CopyIcon class="ml-5" :text="results">复制链接</CopyIcon>
+    </ToolContainer>
   </div>
 </template>
 
 <script>
+import CopyIcon from "~/components/CopyIcon";
 export default {
   name: "SearchHelp",
+  components: {
+    CopyIcon,
+  },
   head() {
     return {
       title: "帮你百度 - ToolWork",
@@ -36,19 +42,18 @@ export default {
     return {
       results: "",
       content: "",
+      maxLength: 50,
     };
   },
   computed: {
     url() {
-      // return `${window.location.origin}/o/search_help?k=${encodeURIComponent(
-      //   this.content
-      // )}`;
-      return "开发中~";
+      return `${
+        window.location.origin
+      }/demonstration/search_help?key=${encodeURIComponent(this.content)}`;
     },
   },
   methods: {
     createCourse() {
-      console.log(this.content, "this.content");
       if (this.content) {
         this.results = this.url;
       } else {
@@ -61,11 +66,18 @@ export default {
 
 <style lang="scss" scoped>
 #search_help {
+  .number {
+    margin-bottom: 5px;
+    text-align: right;
+  }
   .btn {
     margin: 0 auto;
     margin-top: 8px;
     text-align: center;
     width: 150px;
+  }
+  .icon {
+    margin-left: 5px;
   }
 }
 </style>

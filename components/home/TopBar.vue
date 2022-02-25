@@ -2,7 +2,7 @@
   <div id="HomeHeader">
     <nuxt-link to="/">
       <div class="logo">
-        <img src="~/assets/logo.png" alt="ToolWork" class="logo-icon" />
+        <img src="~/assets/images/logo.png" alt="ToolWork" class="logo-icon" />
         <div class="logo-title">
           <span>Tool</span><span class="primary-color">Work</span>
         </div>
