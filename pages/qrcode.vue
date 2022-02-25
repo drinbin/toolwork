@@ -20,6 +20,7 @@
       />
       <a-input
         v-show="type === 'net'"
+        :maxLength="maxlength"
         allow-clear
         v-model.trim="netValue"
         placeholder="www.toolwork.cn"
