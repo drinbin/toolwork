@@ -1,3 +1,4 @@
+const CompressionPlugin = require('compression-webpack-plugin');
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -28,8 +29,10 @@ export default {
     },
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  // 预加载
+  render: {
+    resourceHints: false
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -47,8 +50,33 @@ export default {
     baseURL: '/',
   },
 
+  router: {
+    prefetchLinks: false
+  },
+
+  // chainWebpack: config => {
+  //   // 移除 prefetch 插件
+  //   config.plugins.delete('prefetch');
+  //   // 移除 preload 插件
+  //   config.plugins.delete('preload');
+  // },
+  resourceHints: false,
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    plugins: [
+      new CompressionPlugin({
+        test: /\.js$|\.html$|\.css/,
+        threshold: 10240,
+        deleteOriginalAssets: false
+      })
+    ],
+    optimization: {
+      splitChunks: {
+        minSize: 10000,
+        maxSize: 250000
+      }
+    },
     loaders: {
       less: {
         javascriptEnabled: true,
@@ -57,6 +85,11 @@ export default {
           'link-color': '#2b3e4e',
         }
       }
-    }
+    },
+    analyze: true,
+    vendor: ['ant-design-vue'],
+    productionSourceMap: false,
+    productionGzip: true,
+    productionGzipExtensions: ['js', 'css', 'svg'],
   }
 }
