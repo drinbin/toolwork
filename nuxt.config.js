@@ -8,8 +8,8 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
+      { name: 'theme-color', content: '#00b482' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -37,6 +37,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
+
+  components: true,
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
