@@ -15,8 +15,8 @@
 <script>
 import TopBar from "../components/home/TopBar";
 import Footer from "../components/home/Footer";
-import ToolContainer from "../components/ToolContainer";
-import ToolIntro from "../components/ToolIntro";
+import ToolContainer from "~/components/ToolContainer";
+import ToolIntro from "~/components/ToolIntro";
 export default {
   name: "Index",
   components: {
