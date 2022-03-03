@@ -35,6 +35,11 @@ export default {
           href: "/search_help",
           introduce: "演示怎么百度",
         },
+        {
+          title: "番茄时钟",
+          href: "/tomato_clock",
+          introduce: "高效的时间管理方法",
+        },
       ],
     };
   },
