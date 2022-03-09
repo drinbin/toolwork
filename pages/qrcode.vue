@@ -11,40 +11,39 @@
           {{ maxlength }}
         </div>
       </div>
-      <a-textarea
-        :maxLength="maxlength"
-        v-show="type === 'text'"
-        v-model.trim="textValue"
-        placeholder="人生也一样，有白天和黑夜，只是不会像真正的太阳那样，有定时的日出和日落。"
-        :auto-size="{ minRows: 3 }"
-      />
-      <a-input
-        v-show="type === 'net'"
-        :maxLength="maxlength"
-        allow-clear
-        v-model.trim="netValue"
-        placeholder="www.toolwork.cn"
-        @pressEnter="createCode"
-      >
-        <a-select
-          slot="addonBefore"
-          default-value="http://"
-          @change="changeNet"
-        >
+      <a-textarea :maxLength="maxlength"
+                  v-show="type === 'text'"
+                  v-model.trim="textValue"
+                  placeholder="人生也一样，有白天和黑夜，只是不会像真正的太阳那样，有定时的日出和日落。"
+                  :auto-size="{ minRows: 3 }" />
+      <a-input v-show="type === 'net'"
+               :maxLength="maxlength"
+               allow-clear
+               v-model.trim="netValue"
+               placeholder="www.toolwork.cn"
+               @pressEnter="createCode">
+        <a-select slot="addonBefore"
+                  default-value="http://"
+                  @change="changeNet">
           <a-select-option value="http://">http://</a-select-option>
           <a-select-option value="https://">https://</a-select-option>
         </a-select>
       </a-input>
       <div class="btn">
-        <a-button type="primary" block @click="createCode">生成二维码</a-button>
+        <a-button type="primary"
+                  block
+                  @click="createCode">生成二维码</a-button>
       </div>
     </ToolContainer>
     <ToolIntro>
       <li>若二维码扫描不出来，可调整二维码图片大小</li>
     </ToolIntro>
-    <ToolContainer title="二维码" v-show="picUrl !== ''">
+    <ToolContainer title="二维码"
+                   v-show="picUrl !== ''">
       <div class="qrcode-img">
-        <img alt="二维码" :src="picUrl" :width="`${170 * size}px`" />
+        <img alt="二维码"
+             :src="picUrl"
+             :width="`${170 * size}px`" />
       </div>
       <div class="size-container">
         <span>二维码图片大小：</span>
@@ -55,12 +54,10 @@
           <a-radio :value="1.8"> 特大 </a-radio>
         </a-radio-group>
       </div>
-      <a-alert
-        v-if="resultText"
-        message="二维码解析"
-        :description="resultText"
-        type="info"
-      />
+      <a-alert v-if="resultText"
+               message="二维码解析"
+               :description="resultText"
+               type="info" />
     </ToolContainer>
   </div>
 </template>

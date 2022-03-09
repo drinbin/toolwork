@@ -1,15 +1,17 @@
 <template>
   <div id="home-main">
     <a-row :gutter="16">
-      <a-col
-        v-for="(item, index) in toolList"
-        :key="index"
-        :span="6"
-        class="tool-card"
-      >
-        <nuxt-link :to="item.href" target="_blank">
-          <a-card hoverable :title="item.title" :bordered="false">
-            <span slot="extra" class="secondary-color">使用</span>
+      <a-col v-for="(item, index) in toolList"
+             :key="index"
+             :span="6"
+             class="tool-card">
+        <nuxt-link :to="item.href"
+                   target="_blank">
+          <a-card hoverable
+                  :title="item.title"
+                  :bordered="false">
+            <span slot="extra"
+                  class="secondary-color">使用</span>
             <p class="introduce">{{ item.introduce }}</p>
           </a-card>
         </nuxt-link>

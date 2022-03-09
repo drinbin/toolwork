@@ -1,11 +1,9 @@
 <template>
-  <a-button
-    type="primary"
-    icon="copy"
-    size="small"
-    class="flex"
-    @click="handleCopy"
-  >
+  <a-button type="primary"
+            icon="copy"
+            size="small"
+            class="flex"
+            @click="handleCopy">
     <slot />
   </a-button>
 </template>

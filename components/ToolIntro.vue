@@ -17,7 +17,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: '说明',
+      default: "说明",
     },
   },
 };

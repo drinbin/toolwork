@@ -1,28 +1,25 @@
 <template>
   <div id="search_help">
-    <div ref="mouse" class="mouse">
-      <img
-        v-if="cursorStatus"
-        src="~/assets/images/search_help/mouse_cursor.svg"
-      />
-      <img v-else src="~/assets/images/search_help/mouse_pointer.svg" />
+    <div ref="mouse"
+         class="mouse">
+      <img v-if="cursorStatus"
+           src="~/assets/images/search_help/mouse_cursor.svg" />
+      <img v-else
+           src="~/assets/images/search_help/mouse_pointer.svg" />
     </div>
     <div class="search-box">
-      <img
-        class="logo"
-        src="~/assets/images/search_help/Baidu.png"
-        width="270px"
-      />
+      <img class="logo"
+           src="~/assets/images/search_help/Baidu.png"
+           width="270px" />
       <div class="search-input">
-        <input
-          disabled
-          ref="input"
-          :value="inputVal"
-          type="search"
-          class="input-box"
-          :class="step === 2 ? 'force' : ''"
-        />
-        <button id="su" ref="searchIcon">百度一下</button>
+        <input disabled
+               ref="input"
+               :value="inputVal"
+               type="search"
+               class="input-box"
+               :class="step === 2 ? 'force' : ''" />
+        <button id="su"
+                ref="searchIcon">百度一下</button>
       </div>
     </div>
     <div class="info">
@@ -30,9 +27,9 @@
     </div>
     <div class="footer">
       <span>怎么百度 - BY</span>
-      <nuxt-link class="primary-color" to="/" target="_blank"
-        >ToolWork</nuxt-link
-      >
+      <nuxt-link class="primary-color"
+                 to="/"
+                 target="_blank">ToolWork</nuxt-link>
     </div>
   </div>
 </template>
