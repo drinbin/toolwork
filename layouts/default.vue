@@ -6,9 +6,9 @@
     <div id="main">
       <nuxt class="main" />
     </div>
-    <div id="footer">
+    <!-- <div id="footer">
       <Footer class="footer" />
-    </div>
+    </div> -->
   </div>
 </template>
 
