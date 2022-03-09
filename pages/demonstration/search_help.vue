@@ -15,6 +15,7 @@
       />
       <div class="search-input">
         <input
+          disabled
           ref="input"
           :value="inputVal"
           type="search"
@@ -120,9 +121,9 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  cursor: none;
-}
+// * {
+//   cursor: none;
+// }
 body {
   background-color: #fff;
 }
