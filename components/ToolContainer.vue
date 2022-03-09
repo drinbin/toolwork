@@ -41,6 +41,7 @@ export default {
     display: block;
     border-radius: 5px;
     border: 2px solid #108775;
+    background-color: #108775;
   }
 }
 </style>

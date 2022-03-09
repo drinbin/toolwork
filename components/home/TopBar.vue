@@ -1,13 +1,13 @@
 <template>
   <div id="HomeHeader">
-    <nuxt-link to="/">
-      <div class="logo">
+    <div style="display: flex">
+      <nuxt-link to="/" class="logo">
         <img src="~/assets/images/logo.png" alt="ToolWork" class="logo-icon" />
         <div class="logo-title">
           <span>Tool</span><span class="primary-color">Work</span>
         </div>
-      </div>
-    </nuxt-link>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -22,14 +22,18 @@ export default {
 
 <style lang="scss" scoped>
 #HomeHeader {
+  a:hover {
+    color: #2b3e4e;
+  }
   .logo {
     display: flex;
     align-items: center;
     &-icon {
       width: 32px;
+      user-select: none;
     }
     &-title {
-      margin-left: 6px;
+      padding-left: 6px;
       font-size: 26px;
     }
   }
