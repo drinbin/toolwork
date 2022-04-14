@@ -83,14 +83,21 @@
       class="tomato-box"
       :class="successful ? 'green' : 'origin'"
     >
-      <!-- <div v-if="clockList[currentIndex]" class="tomato-top">
-        {{ clockList[currentIndex].content }}
+      <div v-if="clockList[currentIndex]" class="tomato-box-tip tomato-bg">
+        当前任务：<span class="white">{{
+          clockList[currentIndex].content
+        }}</span>
       </div>
-      <div v-else>-</div> -->
+      <div v-else>-</div>
       <CircleAnimation :progress="progress">
         <div class="cancel" @click="cancel">结 束</div>
         <div class="time">{{ time }}</div>
       </CircleAnimation>
+      <div v-if="clockList[currentIndex]" class="tomato-box-tip">
+        <span v-if="rest">休息一下吧~</span>
+        <span v-else>专注一下~</span>
+      </div>
+      <div v-else>-</div>
       <div
         v-if="!autoPlan && successful"
         class="p-btn"
@@ -119,7 +126,8 @@
           <a-input-number
             v-model="visibleForm.workTime"
             style="width: 100%"
-            :min="0"
+            :min="0.1"
+            :precision="1"
             :max="9999"
             placeholder="请填写专注时间"
           />
@@ -128,7 +136,8 @@
           <a-input-number
             v-model="visibleForm.restTime"
             style="width: 100%"
-            :min="0"
+            :min="0.1"
+            :precision="1"
             :max="9999"
             placeholder="请填写休息时间"
           />
@@ -165,6 +174,7 @@ export default {
       autoPlan: true,
       showBox: false,
       editVisible: false,
+      rest: false,
       visibleForm: {},
       clockList: [new plan()],
     };
@@ -203,24 +213,25 @@ export default {
     },
     handleStart() {
       if (this.clockList.length > 0) {
+        this.currentIndex = 0;
         this.showBox = true;
         this.successful = false;
         this.launchFullscreen();
-        let time = this.clockList[this.currentIndex].workTime * 60 - 0.1;
+        let time = this.clockList[this.currentIndex]?.workTime * 60 - 0.1;
         let past = 0;
-        let rest = false;
+        this.rest = false;
         const startPlan = () => {
           if (time / 60 <= 0.1 && time % 60 <= 0.1) {
             if (this.autoPlan) {
               this.progress = 0;
               past = 0;
-              if (!rest) {
-                time = this.clockList[this.currentIndex].restTime * 60 - 0.1;
+              if (!this.rest) {
+                time = this.clockList[this.currentIndex]?.restTime * 60 - 0.1;
               } else {
-                time = this.clockList[this.currentIndex].workTime * 60 - 0.1;
+                time = this.clockList[this.currentIndex]?.workTime * 60 - 0.1;
               }
               this.successful = !this.successful;
-              rest = !rest;
+              this.rest = !this.rest;
             } else {
               clearInterval(this.interval);
               this.successful = true;
@@ -233,21 +244,35 @@ export default {
           const seconds = parseInt(time % 60);
           this.progress =
             (past /
-              ((rest
-                ? this.clockList[this.currentIndex].restTime
-                : this.clockList[this.currentIndex].workTime) *
+              ((this.rest
+                ? this.clockList[this.currentIndex]?.restTime
+                : this.clockList[this.currentIndex]?.workTime) *
                 60 -
                 1)) *
             100;
           if (minutes === 0 && seconds === 0) {
             this.progress = 100;
-            // this.currentIndex += 1;
+            console.log(this.currentIndex, 'this.currentIndex');
+            if (this.rest && this.clockList.length >= this.currentIndex) {
+              this.currentIndex += 1;
+            }
+            if (this.clockList.length < this.currentIndex) {
+              clearInterval(this.interval);
+              this.successful = true;
+              this.time = '完 成';
+              this.progress = 100;
+              return false;
+            }
           }
           this.time = `${minutes > 9 ? minutes : '0' + minutes}:${
             seconds > 9 ? seconds : '0' + seconds
           }`;
           time -= 0.1;
           past += 0.1;
+          if (this.clockList.length > this.currentIndex) {
+          } else {
+            return false;
+          }
         };
         startPlan();
         this.interval = setInterval(startPlan, 100);
@@ -275,6 +300,7 @@ export default {
 </script>
 
 <style lang="scss">
+$height: 50px;
 #tomato_clock {
   .clock-list {
     margin-bottom: 10px;
@@ -328,6 +354,20 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    .tomato-box-tip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      margin: $height;
+      padding: 20px;
+      min-width: 400px;
+      min-height: 50px;
+      font-size: 21px;
+    }
+    .tomato-bg {
+      background-color: rgba($color: #ffffff, $alpha: 0.2);
+    }
     .info {
       color: #ffffff;
       margin-top: 20px;
