@@ -1,6 +1,10 @@
 <template>
   <div id="footer-bootom">
-    <span>© 2022 ToolWork 版权所有</span>
+    <span>Copyright© 2022 ToolWork 版权所有</span>
+    <a-divider type="vertical" />
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"
+      >粤ICP备2022014981号</a
+    >
   </div>
 </template>
 
@@ -12,6 +16,5 @@ export default {
 
 <style lang="scss" scoped>
 #footer-bootom {
-  text-align: center;
 }
 </style>
